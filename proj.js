@@ -51,11 +51,11 @@ function playRound(human, comp) {
         win = declareWinner(human, comp);
         
         if (win === 1) {
-            console.log(`You won! ${human2} beats ${comp2}`)
+            console.log(`You won! ${human2} beats ${comp2}.`)
             humanScore++
         } 
         else {
-            console.log(`You lost! ${comp2} beats ${human2}`)
+            console.log(`You lost! ${comp2} beats ${human2}.`)
             computerScore++
         }
     } else {
