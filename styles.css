@@ -1,0 +1,21 @@
+.body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    height: 10vh;
+    width: 60vw;
+    margin: auto;
+}
+
+button {
+    flex: 1;
+    font-size: x-large;
+}
+
+score
