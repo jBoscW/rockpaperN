@@ -1,16 +1,16 @@
-.body {
+body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
 }
 
+/* buttons */
 .buttons {
     display: flex;
     justify-content: center;
     gap: 2rem;
     height: 10vh;
     width: 60vw;
-    margin: auto;
 }
 
 button {
@@ -18,4 +18,13 @@ button {
     font-size: x-large;
 }
 
-score
+/* score */
+.score {
+    text-align: center; 
+}
+
+ul {
+    list-style: none; 
+    padding: 0;
+    margin: 0; 
+}
