@@ -2,6 +2,26 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: 'Cascadia Mono';
+}
+
+/* images */
+.images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+img {
+    width: 250px;
+    height: 250px;
+}
+
+.x {
+    font-size: 50px;
 }
 
 /* buttons */
@@ -11,6 +31,8 @@ body {
     gap: 2rem;
     height: 10vh;
     width: 60vw;
+
+    margin-bottom: 2rem;
 }
 
 button {
