@@ -27,16 +27,24 @@ function declareWinner(human, comp) {
     }
 }
 
+// creates win message and removes one before if exists
 function createDiv(text, nodeBefore) {
-    let div = document.createElement('div');
-    div.classList.add('info');
+    let div;
+
+    if (nodeBefore.nextElementSibling.className === 'info') {
+        div = document.querySelector('.info');
+    } else {
+        div = document.createElement('div');
+        div.classList.add('.info');
+    };
+
     div.textContent = text;
-    nodeBefore.after(div)
+    nodeBefore.after(div);
 }
 
 // m
 function playRound(human, comp) {
-    const images = document.querySelector('.images');
+    const imagesDiv = document.querySelector('.images');
     
     if (human !== comp) {
         // capitalize first letter of string
@@ -48,17 +56,17 @@ function playRound(human, comp) {
 
         if (win === 1) {
             const winMsg = `You won! ${humanCapitalized} beats ${compCapitalized}.`;
-            createDiv(winMsg, images);
+            createDiv(winMsg, imagesDiv);
             humanScore++;
         } 
         else {
             const loseMsg = `You lost! ${compCapitalized} beats ${humanCapitalized}.`;
-            createDiv(loseMsg, images);
+            createDiv(loseMsg, imagesDiv);
             compScore++;
         }
     } else {
         const msgTie = 'Tie! Play again.';
-        createDiv(msgTie, images);
+        createDiv(msgTie, imagesDiv);
     }
     
     // // player chooses and play round
@@ -80,8 +88,9 @@ const btns = document.querySelectorAll('button')
 
 btns.forEach(button => {
     button.addEventListener('click', () => {
-        let compC = getComputerChoice();
-        playRound(button.id, compC);
+        const compC = getComputerChoice();
+        const humanC = button.id;
+        playRound(humanC, compC);
     });
 });
 

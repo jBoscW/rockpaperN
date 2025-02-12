@@ -22,17 +22,7 @@
         <button id="scissors">Scissors</button>
     </div>
 
-    <script> 
-        // const btns = document.querySelectorAll('button')
-        // btns.forEach(button => {
-        //     button.addEventListener('click', () => {
-        //         console.log(button.id);
-        //     });
-        // });
-
-    </script> 
-
-    <div class="score">
+    <div class="score rip">
         <h1>Score</h1>
         <h3>Rounds Played: <h3>
         <ul>
@@ -41,5 +31,11 @@
         </ul>
     </div>
 
+    <div class="wowie"></div>
+
+    <script> 
+        const rock = document.querySelector('.score');
+        console.log(rock.previousElementSibling.className);
+    </script> 
 </body>
 </html>
