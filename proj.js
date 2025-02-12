@@ -29,69 +29,64 @@ function declareWinner(human, comp) {
 
 // m
 function playRound(human, comp) {
-    let win;
+    const images = document.querySelector('.images');
     
-    // capitalize first letter of string
-    const humanCapitalized = human[0].toUpperCase() + human.slice(1);
-    const compCapitalized = comp[0].toUpperCase() + comp.slice(1);
-
-    // put in screen who won
     if (human !== comp) {
-        win = declareWinner(human, comp);
+        // capitalize first letter of string
+        const humanCapitalized = human[0].toUpperCase() + human.slice(1);
+        const compCapitalized = comp[0].toUpperCase() + comp.slice(1);
         
+        // display who won with Capitalizeds
+        const win = declareWinner(human, comp);
+
         if (win === 1) {
-            console.log(`You won! ${humanCapitalized} beats ${compCapitalized}.`)
-            humanScore++
+            const div = document.createElement('div');
+            div.classList.add('info');
+            div.textContent = `You won! ${humanCapitalized} beats ${compCapitalized}.`;
+            images.after(div);
+            humanScore++;
         } 
         else {
-            console.log(`You lost! ${compCapitalized} beats ${humanCapitalized}.`)
-            compScore++
+            const div = document.createElement('div');
+            div.classList.add('info');
+            div.textContent = `You lost! ${compCapitalized} beats ${humanCapitalized}.`;
+            images.after(div);
+            compScore++;
         }
     } else {
-        console.log('Tie, play again!')
-        win = 0
+        const div = document.createElement('div');
+        div.classList.add('info');
+        div.textContent = 'Tie! Play again.';
+        images.after(div);
     }
-}
-
-// m
-function playGame() {
-    let gameOver = false
-    const btns = document.querySelectorAll('button')
     
-    while (!gameOver) {
-    // make comp choice
-        let compC = getComputerChoice();
-        console.log(compC)
+    // // player chooses and play round
+    // if (humanScore >= 3) {
+    //     console.log(`Game Over! You won.`);
+    //     console.log(`Games played: ${noGames} \nYour score: ${humanScore} \nComputer Score: ${compScore} `);
+    //     gameOver = true;
+    // };
+};
 
-        // player chooses and play round
-        btns.forEach(button => {
-            button.addEventListener('click', () => {
-                playRound(button.id, compC);
-            });
-        });
-
-        // noGames++;
-
-        if (humanScore >= 3) {
-            console.log(`Game Over! You won.`);
-            console.log(`Games played: ${noGames} \nYour score: ${humanScore} \nComputer Score: ${compScore} `);
-            gameOver = true;
-        } else if (compScore >= 3) {
-            console.log(`Game Over! You lost.`);
-            console.log(`Games played: ${noGames} \nYour score: ${humanScore} \nComputer Score: ${compScore} `);
-            gameOver = true;
-        };
-    };
-}
-
-
+// creating vars
 let humanScore = 0;
 let compScore = 0;
+let noGames = 0;
+
+
+// building logic for button events, and playing round
+const btns = document.querySelectorAll('button')
+
+btns.forEach(button => {
+    button.addEventListener('click', () => {
+        let compC = getComputerChoice();
+        playRound(button.id, compC);
+    });
+});
+
+
 
 const ROCK_IMG = document.createElement('img');
 ROCK_IMG.setAttribute('src', './images/rock.png');
-
-playGame()
-
 
 

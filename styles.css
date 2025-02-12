@@ -3,6 +3,12 @@ body {
     flex-direction: column;
     align-items: center;
     font-family: 'Cascadia Mono';
+    gap: 2rem;
+}
+
+/* that will be added */
+.info {
+    size: large;
 }
 
 /* images */
@@ -12,7 +18,6 @@ body {
     align-items: center;
 
     gap: 2rem;
-    margin-bottom: 3rem;
 }
 
 img {
@@ -31,8 +36,6 @@ img {
     gap: 2rem;
     height: 10vh;
     width: 60vw;
-
-    margin-bottom: 2rem;
 }
 
 button {
