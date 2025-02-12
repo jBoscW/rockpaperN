@@ -27,6 +27,13 @@ function declareWinner(human, comp) {
     }
 }
 
+function createDiv(text, nodeBefore) {
+    let div = document.createElement('div');
+    div.classList.add('info');
+    div.textContent = text;
+    nodeBefore.after(div)
+}
+
 // m
 function playRound(human, comp) {
     const images = document.querySelector('.images');
@@ -40,24 +47,18 @@ function playRound(human, comp) {
         const win = declareWinner(human, comp);
 
         if (win === 1) {
-            const div = document.createElement('div');
-            div.classList.add('info');
-            div.textContent = `You won! ${humanCapitalized} beats ${compCapitalized}.`;
-            images.after(div);
+            const winMsg = `You won! ${humanCapitalized} beats ${compCapitalized}.`;
+            createDiv(winMsg, images);
             humanScore++;
         } 
         else {
-            const div = document.createElement('div');
-            div.classList.add('info');
-            div.textContent = `You lost! ${compCapitalized} beats ${humanCapitalized}.`;
-            images.after(div);
+            const loseMsg = `You lost! ${compCapitalized} beats ${humanCapitalized}.`;
+            createDiv(loseMsg, images);
             compScore++;
         }
     } else {
-        const div = document.createElement('div');
-        div.classList.add('info');
-        div.textContent = 'Tie! Play again.';
-        images.after(div);
+        const msgTie = 'Tie! Play again.';
+        createDiv(msgTie, images);
     }
     
     // // player chooses and play round
