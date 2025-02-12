@@ -11,20 +11,6 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    while (true) {
-        let choice = prompt("Make a valid choice: Rock, Paper, & Scissors")
-        choice = choice.toLowerCase()
-
-        if (choice === 'rock'|| choice === 'scissors' || choice === 'paper') {
-            console.log(choice)
-            return choice
-        } else {
-            console.log("Make a valid choice!")
-        }
-    }
-}
-
 // returns 1 if human wins, 2 if computer
 function declareWinner(human, comp) {
     // don't have to check for tie bc check is in playRound function
@@ -41,22 +27,25 @@ function declareWinner(human, comp) {
     }
 }
 
-
+// m
 function playRound(human, comp) {
     let win;
-    const human2 = human[0].toUpperCase() + human.slice(1);
-    const comp2 = comp[0].toUpperCase() + comp.slice(1);
+    
+    // capitalize first letter of string
+    const humanCapitalized = human[0].toUpperCase() + human.slice(1);
+    const compCapitalized = comp[0].toUpperCase() + comp.slice(1);
 
-    if (human != comp) {
+    // put in screen who won
+    if (human !== comp) {
         win = declareWinner(human, comp);
         
         if (win === 1) {
-            console.log(`You won! ${human2} beats ${comp2}.`)
+            console.log(`You won! ${humanCapitalized} beats ${compCapitalized}.`)
             humanScore++
         } 
         else {
-            console.log(`You lost! ${comp2} beats ${human2}.`)
-            computerScore++
+            console.log(`You lost! ${compCapitalized} beats ${humanCapitalized}.`)
+            compScore++
         }
     } else {
         console.log('Tie, play again!')
@@ -64,31 +53,42 @@ function playRound(human, comp) {
     }
 }
 
-let humanScore = 0;
-let computerScore = 0;
-
+// m
 function playGame() {
-    let gameOver = false, noGames = 0;
-    
-    while (!gameOver) {
-        const compC = getComputerChoice();
-        // console.log(compC)
-        const humanC = getHumanChoice();
+    let gameOver = false
+    const btns = document.querySelectorAll('button')
+        
+    // make comp choice
+    const compC = getComputerChoice();
 
-        playRound(humanC, compC);
-        noGames++;
+    // player chooses and play round
+    btns.forEach(button => {
+        button.addEventListener('click', (choice) => {
+            playRound(choice.id, compC);
+        });
+    });
 
-        if (humanScore >= 3) {
-            console.log(`Game Over! You won.`);
-            console.log(`Games played: ${noGames} \nYour score: ${humanScore} \nComputer Score: ${computerScore} `);
-            gameOver = true;
-        } else if (computerScore >= 3) {
-            console.log(`Game Over! You lost.`);
-            console.log(`Games played: ${noGames} \nYour score: ${humanScore} \nComputer Score: ${computerScore} `);
-            gameOver = true;
-        }
+    // noGames++;
+
+    if (humanScore >= 3) {
+        console.log(`Game Over! You won.`);
+        console.log(`Games played: ${noGames} \nYour score: ${humanScore} \nComputer Score: ${compScore} `);
+        gameOver = true;
+    } else if (compScore >= 3) {
+        console.log(`Game Over! You lost.`);
+        console.log(`Games played: ${noGames} \nYour score: ${humanScore} \nComputer Score: ${compScore} `);
+        gameOver = true;
     }
 }
 
+
+let humanScore = 0;
+let compScore = 0;
+
+const ROCK_IMG = document.createElement('img');
+ROCK_IMG.setAttribute('src', './images/rock.png');
+
 playGame()
+
+
 
