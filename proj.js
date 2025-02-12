@@ -29,14 +29,11 @@ function declareWinner(human, comp) {
 
 // creates win message and removes one before if exists
 function createDiv(text, nodeBefore) {
-    let div;
-
-    if (nodeBefore.nextElementSibling.className === 'info') {
-        div = document.querySelector('.info');
-    } else {
+    let div = document.querySelector(".info")
+    if (!div) {
         div = document.createElement('div');
         div.classList.add('.info');
-    };
+    }
 
     div.textContent = text;
     nodeBefore.after(div);
