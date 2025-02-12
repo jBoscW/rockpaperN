@@ -30,19 +30,16 @@ function declareWinner(human, comp) {
 // creates win message and removes one before if exists
 function createDiv(text, nodeBefore) {
     let div = document.querySelector(".info")
-    if (!div) {
-        div = document.createElement('div');
-        div.classList.add('.info');
-    }
+    // if (!div) {
+    //     div = document.createElement('div');
+    //     div.classList.add('.info');
+    // }
 
     div.textContent = text;
     nodeBefore.after(div);
 }
 
-// m
-function playRound(human, comp) {
-    const imagesDiv = document.querySelector('.images');
-    
+function playRound(human, comp) {    
     if (human !== comp) {
         // capitalize first letter of string
         const humanCapitalized = human[0].toUpperCase() + human.slice(1);
@@ -66,6 +63,15 @@ function playRound(human, comp) {
         createDiv(msgTie, imagesDiv);
     }
     
+    // updating scores
+    scores
+
+
+
+    if (humanScore >= 3) {
+
+    }
+
     // // player chooses and play round
     // if (humanScore >= 3) {
     //     console.log(`Game Over! You won.`);
@@ -79,9 +85,12 @@ let humanScore = 0;
 let compScore = 0;
 let noGames = 0;
 
+const scores = document.querySelectorAll('li');
+const imagesDiv = document.querySelector('.images');
+
 
 // building logic for button events, and playing round
-const btns = document.querySelectorAll('button')
+const btns = document.querySelectorAll('button');
 
 btns.forEach(button => {
     button.addEventListener('click', () => {
@@ -90,6 +99,11 @@ btns.forEach(button => {
         playRound(humanC, compC);
     });
 });
+
+// logic for other things
+
+
+
 
 
 
