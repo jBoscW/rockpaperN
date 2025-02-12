@@ -57,28 +57,31 @@ function playRound(human, comp) {
 function playGame() {
     let gameOver = false
     const btns = document.querySelectorAll('button')
-        
+    
+    while (!gameOver) {
     // make comp choice
-    const compC = getComputerChoice();
+        let compC = getComputerChoice();
+        console.log(compC)
 
-    // player chooses and play round
-    btns.forEach(button => {
-        button.addEventListener('click', (choice) => {
-            playRound(choice.id, compC);
+        // player chooses and play round
+        btns.forEach(button => {
+            button.addEventListener('click', () => {
+                playRound(button.id, compC);
+            });
         });
-    });
 
-    // noGames++;
+        // noGames++;
 
-    if (humanScore >= 3) {
-        console.log(`Game Over! You won.`);
-        console.log(`Games played: ${noGames} \nYour score: ${humanScore} \nComputer Score: ${compScore} `);
-        gameOver = true;
-    } else if (compScore >= 3) {
-        console.log(`Game Over! You lost.`);
-        console.log(`Games played: ${noGames} \nYour score: ${humanScore} \nComputer Score: ${compScore} `);
-        gameOver = true;
-    }
+        if (humanScore >= 3) {
+            console.log(`Game Over! You won.`);
+            console.log(`Games played: ${noGames} \nYour score: ${humanScore} \nComputer Score: ${compScore} `);
+            gameOver = true;
+        } else if (compScore >= 3) {
+            console.log(`Game Over! You lost.`);
+            console.log(`Games played: ${noGames} \nYour score: ${humanScore} \nComputer Score: ${compScore} `);
+            gameOver = true;
+        };
+    };
 }
 
 
