@@ -29,11 +29,10 @@ function declareWinner(human, comp) {
 
 // creates win message and removes one before if exists
 function createDiv(text, nodeBefore) {
-    let div = document.querySelector(".info")
-    // if (!div) {
-    //     div = document.createElement('div');
-    //     div.classList.add('.info');
-    // }
+    if (!div) {
+        div = document.createElement('div');
+        div.classList.add('.info');
+    }
 
     div.textContent = text;
     nodeBefore.after(div);
@@ -87,6 +86,7 @@ let noGames = 0;
 
 const scores = document.querySelectorAll('li');
 const imagesDiv = document.querySelector('.images');
+let div = document.querySelector('.info')
 
 
 // building logic for button events, and playing round
