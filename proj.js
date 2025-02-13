@@ -18,7 +18,7 @@ function declareWinner(human, comp) {
         if (human === 'scissors' || comp === 'scissors') {
             return human === 'rock' ? 1 : 2;
         
-        } else if (human === 'paper' || comp === 'paper'){
+        } else {
             return human === 'rock' ? 2 : 1;
         }
     // necessarily, one played paper and the other scissors
@@ -62,8 +62,7 @@ function updateImage(human, comp) {
 }
 
 
-function playRound(human, comp) {    
-
+async function playRound(human, comp) {    
     updateImage(human, comp);
 
     if (human !== comp) {
@@ -93,12 +92,14 @@ function playRound(human, comp) {
     numGames++;
     updateScore();
 
-    if (humanScore >= 3) {
+    await new Promise(resolve => setTimeout(resolve, 100))
+    
+    if (humanScore >= winPoints) {
         alert(`You won!\nGames played: ${numGames} \nYour score: ${humanScore} \nComputer Score: ${compScore} `);
         alert('Resetting Game!');
         updateScore(reset = true);
 
-    } else if (compScore >= 3) {
+    } else if (compScore >= winPoints) {
         alert(`You lost!\nGames played: ${numGames} \nYour score: ${humanScore} \nComputer Score: ${compScore} `);
         alert('Resetting Game!');
         updateScore(reset = true);
@@ -109,6 +110,7 @@ function playRound(human, comp) {
 let humanScore = 0;
 let compScore = 0;
 let numGames = 0;
+const winPoints = 3;
 
 const score = document.querySelector('h1');
 const rounds = document.querySelector('#rounds');
@@ -119,6 +121,8 @@ let div = document.querySelector('.info')
 const imagesDiv = document.querySelector('.images');
 const humanImg = document.querySelector('#humanImg');
 const compImg = document.querySelector('#compImg');
+
+
 
 // building logic for button events, and playing round
 const btns = document.querySelectorAll('button');
