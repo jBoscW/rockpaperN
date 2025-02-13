@@ -29,7 +29,6 @@ function declareWinner(human, comp) {
 
 // creates win message and removes one before if exists
 function matchResult(text, nodeBefore) {
-    let div = document.querySelector('.info')
     if (!div) {
         div = document.createElement('div');
         div.classList.add('info');
@@ -116,6 +115,7 @@ const rounds = document.querySelector('#rounds');
 const humanScoreText = document.querySelector('#humanS');
 const compScoreText = document.querySelector('#compS');
 
+let div = document.querySelector('.info')
 const imagesDiv = document.querySelector('.images');
 const humanImg = document.querySelector('#humanImg');
 const compImg = document.querySelector('#compImg');
