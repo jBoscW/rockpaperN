@@ -28,15 +28,33 @@ function declareWinner(human, comp) {
 }
 
 // creates win message and removes one before if exists
-function createDiv(text, nodeBefore) {
+function matchResult(text, nodeBefore) {
+    let div = document.querySelector('.info')
     if (!div) {
         div = document.createElement('div');
-        div.classList.add('.info');
+        div.classList.add('info');
     }
 
     div.textContent = text;
     nodeBefore.after(div);
 }
+
+function updateScore(reset = false) {
+    score.textContent = 'Score: ' + humanScore + ' -- ' + compScore;
+    rounds.textContent = 'Rounds Played: ' + numGames;
+    humanScoreText.textContent = 'Human Score: ' + humanScore;
+    compScoreText.textContent = 'Computer Score: ' + compScore;
+
+    if (reset) {
+        score.textContent = 'Score: 0 -- 0';
+        rounds.textContent = 'Rounds Played: 0: ';
+        humanScoreText.textContent = 'Human Score: 0';
+        compScoreText.textContent = 'Computer Score: 0';
+
+        humanScore = compScore = numGames = 0;
+    }
+}
+
 
 function playRound(human, comp) {    
     if (human !== comp) {
@@ -49,45 +67,45 @@ function playRound(human, comp) {
 
         if (win === 1) {
             const winMsg = `You won! ${humanCapitalized} beats ${compCapitalized}.`;
-            createDiv(winMsg, imagesDiv);
+            matchResult(winMsg, imagesDiv);
             humanScore++;
         } 
         else {
             const loseMsg = `You lost! ${compCapitalized} beats ${humanCapitalized}.`;
-            createDiv(loseMsg, imagesDiv);
+            matchResult(loseMsg, imagesDiv);
             compScore++;
         }
     } else {
         const msgTie = 'Tie! Play again.';
-        createDiv(msgTie, imagesDiv);
+        matchResult(msgTie, imagesDiv);
     }
     
     // updating scores
-    scores
-
-
+    numGames++;
+    updateScore();
 
     if (humanScore >= 3) {
+        alert(`You won!\nGames played: ${numGames} \nYour score: ${humanScore} \nComputer Score: ${compScore} `);
+        alert('Resetting Game!');
+        updateScore(reset = true);
 
-    }
-
-    // // player chooses and play round
-    // if (humanScore >= 3) {
-    //     console.log(`Game Over! You won.`);
-    //     console.log(`Games played: ${noGames} \nYour score: ${humanScore} \nComputer Score: ${compScore} `);
-    //     gameOver = true;
-    // };
+    } else if (compScore >= 3) {
+        alert(`You lost!\nGames played: ${numGames} \nYour score: ${humanScore} \nComputer Score: ${compScore} `);
+        alert('Resetting Game!');
+        updateScore(reset = true);
+    };
 };
 
 // creating vars
 let humanScore = 0;
 let compScore = 0;
-let noGames = 0;
+let numGames = 0;
 
-const scores = document.querySelectorAll('li');
 const imagesDiv = document.querySelector('.images');
-let div = document.querySelector('.info')
-
+const score = document.querySelector('h1');
+const rounds = document.querySelector('#rounds');
+const humanScoreText = document.querySelector('#humanS');
+const compScoreText = document.querySelector('#compS');
 
 // building logic for button events, and playing round
 const btns = document.querySelectorAll('button');
@@ -101,12 +119,6 @@ btns.forEach(button => {
 });
 
 // logic for other things
-
-
-
-
-
-
 const ROCK_IMG = document.createElement('img');
 ROCK_IMG.setAttribute('src', './images/rock.png');
 
