@@ -39,6 +39,7 @@ function matchResult(text, nodeBefore) {
     nodeBefore.after(div);
 }
 
+// updates score messages
 function updateScore(reset = false) {
     score.textContent = 'Score: ' + humanScore + ' -- ' + compScore;
     rounds.textContent = 'Rounds Played: ' + numGames;
@@ -55,8 +56,17 @@ function updateScore(reset = false) {
     }
 }
 
+//updates images that appear yay
+function updateImage(human, comp) {
+    humanImg.src = `./images/${human}.png`
+    compImg.src = `./images/${comp}.png`
+}
+
 
 function playRound(human, comp) {    
+
+    updateImage(human, comp);
+
     if (human !== comp) {
         // capitalize first letter of string
         const humanCapitalized = human[0].toUpperCase() + human.slice(1);
@@ -101,11 +111,14 @@ let humanScore = 0;
 let compScore = 0;
 let numGames = 0;
 
-const imagesDiv = document.querySelector('.images');
 const score = document.querySelector('h1');
 const rounds = document.querySelector('#rounds');
 const humanScoreText = document.querySelector('#humanS');
 const compScoreText = document.querySelector('#compS');
+
+const imagesDiv = document.querySelector('.images');
+const humanImg = document.querySelector('#humanImg');
+const compImg = document.querySelector('#compImg');
 
 // building logic for button events, and playing round
 const btns = document.querySelectorAll('button');
@@ -117,9 +130,5 @@ btns.forEach(button => {
         playRound(humanC, compC);
     });
 });
-
-// logic for other things
-const ROCK_IMG = document.createElement('img');
-ROCK_IMG.setAttribute('src', './images/rock.png');
 
 
